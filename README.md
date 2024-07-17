@@ -46,10 +46,8 @@
  - [ ] apply for a verified author 
  - [ ] gift a membership
 
-       ![image](https://github.com/user-attachments/assets/1a80d58e-d1d9-49e2-ab2f-0031b91ef4e9)
-       ![image](https://github.com/user-attachments/assets/84446da4-dd35-495f-8d4e-4b158e86ab55)
-       ![image](https://github.com/user-attachments/assets/20956592-88c6-4093-973d-a41093f5f65b)
-       ![image](https://github.com/user-attachments/assets/a28a54a8-e66b-4564-b11d-f6760dfa3b70)
+![image](https://github.com/user-attachments/assets/279ced4a-9742-4a1e-b3ba-ac18f41c7832)
+
 
 
 
