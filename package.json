@@ -1,0 +1,75 @@
+{
+  "name": "skillmate-blogs",
+  "version": "0.8.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "dev-prod": "NODE_ENV=dev node --trace-warnings server.js ",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js",
+    "lint": "next lint",
+    "prismadb": "npx prisma db push && npx prisma generate",
+    "studio": "npx prisma studio --port 30006 --browser none",
+    "push-tags": "git push --follow-tags origin ",
+    "pm2": "pm2 start --name 'blog-stage' server.js --wait-ready"
+  },
+  "dependencies": {
+    "@auth/prisma-adapter": "^2.4.1",
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-brands-svg-icons": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "@nextui-org/theme": "^2.2.6",
+    "@prisma/client": "^5.16.2",
+    "@radix-ui/react-dialog": "^1.1.1",
+    "@radix-ui/react-scroll-area": "^1.1.0",
+    "axios": "^1.7.2",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "dompurify": "^3.1.6",
+    "fs": "^0.0.1-security",
+    "html-react-parser": "^5.1.10",
+    "lucide-react": "^0.408.0",
+    "next": "^14.2.5",
+    "next-auth": "^4.24.7",
+    "quill": "^2.0.2",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^5.2.1",
+    "react-quill": "^2.0.0",
+    "sanitize-html": "^2.13.0",
+    "sharp": "^0.33.4",
+    "swr": "^2.2.5",
+    "tailwind-merge": "^2.4.0",
+    "tailwindcss-animate": "^1.0.7",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/dompurify": "^3.0.5",
+    "@types/node": "^20.14.10",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18",
+    "@types/sanitize-html": "^2.11.0",
+    "@types/uuid": "^10.0.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.4",
+    "postcss": "^8",
+    "prisma": "^5.16.2",
+    "standard-version": "^9.5.0",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  },
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

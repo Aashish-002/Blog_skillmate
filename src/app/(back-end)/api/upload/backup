@@ -1,0 +1,31 @@
+import { NextRequest, NextResponse } from "next/server";
+import path from "path";
+import fs from "fs";
+
+export async function POST(req: NextRequest) {
+  const form = await req.formData();
+  const file = form.get("file") as File;
+
+  if (!file) {
+    return JSON.stringify({ message: "Missing required fields" });
+  }
+
+  const originalFileName = file.name;
+  const uploadDir = path.join(process.cwd(), "public/uploads");
+  const filePath = path.join(uploadDir, originalFileName);
+
+  try {
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+
+    const buffer = Buffer.from(await file.arrayBuffer());
+    fs.writeFileSync(filePath, buffer);
+
+    return NextResponse.json({ message: "success", imgUrl: originalFileName }, { status: 200 });
+  } catch (error) {
+    console.log(error);
+
+    return NextResponse.json({ error: "Something wrong" }, { status: 200 });
+  }
+}

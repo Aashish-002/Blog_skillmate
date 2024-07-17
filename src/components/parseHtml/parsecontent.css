@@ -1,0 +1,57 @@
+.content {
+  margin: 0rem 0.5rem;
+  text-align: justify;
+  font-family: "Inter";
+  font-weight: 500;
+}
+
+.content p {
+  font-family: "Inter";
+  word-spacing: 0.15rem;
+  
+}
+
+.content ul,
+.content li {
+  list-style: disc;
+  margin-left: 1rem;
+  color: green;
+}
+
+.content h1,
+.content h2,
+.content h3 {
+  font-size: revert;
+  font-family: "Inter";
+}
+
+
+@media only screen and (max-width: 500px) {
+  .content {
+    word-spacing: normal;
+    font-family: "Inter", sans-serif;
+  }
+
+  .content strong {
+    font-family: "Inter", sans-serif;
+  }
+
+  .content p {
+    word-spacing: normal;
+    letter-spacing: 0;
+    font-family: "Inter", sans-serif;
+  }
+
+  .content h1 {
+    font-size: 28px;
+  }
+
+  .content h1,
+  .content h2,
+  .content h3 {
+    letter-spacing: 0;
+    word-spacing: normal;
+    text-align: start;
+    font-family: "Inter", sans-serif;
+  }
+}

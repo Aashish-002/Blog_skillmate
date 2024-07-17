@@ -1,0 +1,146 @@
+"use client";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.bubble.css";
+
+type Props = {};
+
+const UploadBlogPage = (props: Props) => {
+  const [open, setOpen] = useState<boolean>(false);
+  const [file, setFile] = useState<File | null>(null); //image file
+  const [media, setMedia] = useState<string>("");
+  const [value, setValue] = useState("");
+  const [title, setTitle] = useState("");
+  const [catSlug, setCatSlug] = useState("");
+
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    const upload = () => {
+      // unique file name
+      const fileName = new Date().getTime + file?.name!
+      setMedia(fileName)
+    }
+
+    // if file is not null, then fire the upload function
+    file && upload;
+  }, [file])
+
+  const slugify = (str: string) =>
+    str
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/[\s_-]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+
+  const handleSubmit = async () => {
+    const formData = new FormData();
+    formData.append('userId', session?.user.id!)
+    formData.append('title', title);
+    formData.append('img', media);
+    formData.append('category', catSlug);
+    formData.append('slug', slugify(title));
+
+    const res = await fetch('/api/posts', {
+      method: "POST",
+      body: JSON.stringify({
+        title,
+        desc: value,
+        img: media,
+        slug: slugify(title),
+        catSlug: catSlug || "style", //If not selected, choose the general category
+      })
+    })
+  }
+
+  if (status === "unauthenticated") {
+    router.push("/login");
+  }
+
+  if (status === "authenticated" && session.user.role === "USER") {
+    throw new Error("Only ADMIN can access this page");
+  }
+
+  return (
+    <div className="relative flex flex-col">
+      <button className="absolute  top-0 right-0 px-3 py-3 w-max  font-inter   bg-[#0DBA4B] text-xl text-white cursor-pointer rounded" onClick={handleSubmit}>
+        Publish
+      </button>
+      <input
+        type="text"
+        name="title"
+        id="title"
+        placeholder="Title"
+        className="p-[20px] text-5xl mt-14 bg-transparent text-black font-inter"
+        onChange={e => setTitle(e.target.value)}
+      />
+
+      <select className="mb-[50px] mt-[20px] ml-[50px] w-max px-[7px] py-[10px] font-inter border border-gray-500">
+        <option value="all">All</option>
+        <option value="marketing">Marketing</option>
+        <option value="design">Design</option>
+        <option value="content creation">Content Creation</option>
+        <option value="developing">Developing</option>
+      </select>
+
+      <div className="relative flex gap-5 h-[700px]">
+        <button
+          className=" flex items-center justify-center cursor-pointer w-[36px] h-[36px] rounded bg-transparent border border-black"
+          onClick={() => setOpen(!open)}
+        >
+          <Image
+            src={"/images/editor/plus.png"}
+            width={16}
+            height={16}
+            alt=""
+          />
+        </button>
+        {open && (
+          <div className=" absolute flex gap-[20px] w-full left-[50px]  z-999">
+            <input
+              type="file"
+              id="image"
+              // @ts-ignore
+              onChange={(e) => setFile(e.target.files[0])}
+              style={{ display: "none" }}
+            />
+            {/* upload image */}
+            <button className="flex items-center justify-center cursor-pointer w-[36px] h-[36px] rounded bg-transparent border border-black">
+              <label htmlFor="image">
+                <Image
+                  src={"/images/editor/image.png"}
+                  width={16}
+                  height={16}
+                  alt=""
+                />
+              </label>
+            </button>
+
+            <button className=" flex items-center justify-center cursor-pointer w-[36px] h-[36px] rounded bg-transparent border border-black">
+              <Image
+                src={"/images/editor/external.png"}
+                width={16}
+                height={16}
+                alt=""
+              />
+            </button>
+          </div>
+        )}
+        <ReactQuill
+          theme="bubble"
+          value={value}
+          onChange={setValue}
+          placeholder="Tell Your Story"
+          className="w-full mt-7"
+        />
+      </div>
+    </div>
+  );
+};
+
+export default UploadBlogPage;

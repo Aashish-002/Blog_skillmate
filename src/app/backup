@@ -1,0 +1,40 @@
+import CardList from "@/components/cardList/CardList";
+import Footer from "@/components/footer/Footer";
+import LandingPage from "@/components/landingPage/LandingPage";
+import Menu from "@/components/menu/Menu";
+import Link from "next/link";
+import TermsandConditions from "@/components/Terms/Termsandconditions";
+import Header from "@/components/header/Header";
+import CategoryList from "@/components/categoryList/CategoryList";
+
+export default function Home({searchParams}: {searchParams: any}) {
+
+  // pagination
+  const page = parseInt(searchParams.page) || 1;
+
+
+  
+  return (
+    <>
+      <LandingPage />
+      <CategoryList />
+      {/* make two columns */}
+      <div className="flex gap-[50px]">
+        <CardList page={page} />
+        <Menu />
+      </div>
+      {/* <div className="flex  justify-between">
+          <CardList />
+          <Menu />
+        </div>
+        <Link
+          href=""
+          className="text-black  flex items-center justify-center mb-6"
+        >
+          Read More
+        </Link> */}
+
+      {/* <Footer /> */}
+    </>
+  );
+}

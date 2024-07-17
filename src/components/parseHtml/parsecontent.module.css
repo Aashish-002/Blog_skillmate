@@ -1,0 +1,54 @@
+.content {
+  margin: 0rem 2rem;
+  text-align: justify;
+  font-family: "Inter";
+  font-weight: 500;
+  /* background-image: url("https://i.pinimg.com/originals/1f/c6/b6/1fc6b6d42dd593981a25c6b1170db99f.jpg");
+  background-size: cover; */
+}
+.content p{
+  font-family: "Inter";
+}
+.content ul,
+.content li {
+  list-style: disc;
+  margin-left: 2rem;
+  font-family: "Inter";
+}
+
+.content h1,
+.content h2,
+.content h3 {
+  font-size: revert;
+  font-family: "Inter";
+  color: black;
+  opacity: .75;
+}
+
+@media only screen and (max-width: 500px) {
+  .content {
+    word-spacing: 0px;
+    font-family: "Inter", sans-serif;
+  }
+
+  .content strong {
+
+    font-family:  "Inter", sans-serif;
+  }
+  .content p {
+    letter-spacing: -0.0; 
+    font-family:  "Inter", sans-serif;
+  }
+  .content h1{
+    font-size: 28px;
+  }
+
+  .content h1,
+  .content h2,
+  .content h3{
+    letter-spacing: -0.08rem;
+    word-spacing: 0rem;
+    text-align: start;
+    font-family: "Inter", sans-serif;
+  }
+}
